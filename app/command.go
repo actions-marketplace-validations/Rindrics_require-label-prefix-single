@@ -1,7 +1,7 @@
 package app
 
 func (c *PostCommentCommand) Execute() error {
-	err := c.Commenter.PostComment(c.CommentInfo)
+	err := c.Commenter.PostComment(c.EventInfo)
 	if err != nil {
 		return err
 	}
@@ -14,7 +14,7 @@ func (c *PostCommentCommand) Perform() error {
 }
 
 func (c *AddLabelsCommand) Execute() error {
-	if err := c.Labeler.AddLabels(c.LabelInfo); err != nil {
+	if err := c.Labeler.AddLabels(c.EventInfo, c.Labels); err != nil {
 		return err
 	}
 

@@ -4,34 +4,31 @@ type Command interface {
 	Execute() error
 }
 
-type CommentInfo struct {
+type Labels []string
+
+type EventInfo struct {
 	Owner, Repo string
 	Number      int
 	Body        string
 }
 
 type Commenter interface {
-	PostComment(CommentInfo) error
+	PostComment(EventInfo) error
 }
 
 type PostCommentCommand struct {
-	CommentInfo CommentInfo
-	Commenter   Commenter
-	onSuccess   Action
-}
-
-type LabelInfo struct {
-	Owner, Repo string
-	Number      int
-	Labels      []string
+	EventInfo EventInfo
+	Commenter Commenter
+	onSuccess Action
 }
 
 type Labeler interface {
-	AddLabels(info LabelInfo) error
+	AddLabels(EventInfo, Labels) error
 }
 
 type AddLabelsCommand struct {
-	LabelInfo LabelInfo
+	EventInfo EventInfo
+	Labels    Labels
 	Labeler   Labeler
 	onSuccess PostCommentCommand
 }

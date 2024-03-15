@@ -19,21 +19,22 @@ func (m *MockAction) Perform() error {
 
 type MockCommenter struct {
 	mock.Mock
-	CommentInfo
+	EventInfo
 }
 
-func (m *MockCommenter) PostComment(c CommentInfo) error {
+func (m *MockCommenter) PostComment(c EventInfo) error {
 	args := m.Called(c)
 	return args.Error(0)
 }
 
 type MockLabeler struct {
 	mock.Mock
-	LabelInfo
+	EventInfo
+	Labels
 }
 
-func (m *MockLabeler) AddLabels(l LabelInfo) error {
-	args := m.Called(l)
+func (m *MockLabeler) AddLabels(e EventInfo, l Labels) error {
+	args := m.Called(e, l)
 	return args.Error(0)
 }
 
@@ -74,7 +75,7 @@ func TestPostCommentCommandError(t *testing.T) {
 	mockAction := new(MockAction)
 
 	expectedError := errors.New("failed to post comment")
-	mockCommenter.On("PostComment", mockCommenter.CommentInfo).Return(expectedError)
+	mockCommenter.On("PostComment", mockCommenter.EventInfo).Return(expectedError)
 	mockAction.On("Perform").Return(nil)
 
 	command := PostCommentCommand{
@@ -93,8 +94,8 @@ func TestAddLabelsCommandWithPostCommentOnSuccess(t *testing.T) {
 	mockCommenter := new(MockCommenter)
 	mockAction := new(MockAction)
 
-	mockLabeler.On("AddLabels", mockLabeler.LabelInfo).Return(nil)
-	mockCommenter.On("PostComment", mockCommenter.CommentInfo).Return(nil)
+	mockLabeler.On("AddLabels", mockLabeler.EventInfo, mockLabeler.Labels).Return(nil)
+	mockCommenter.On("PostComment", mockCommenter.EventInfo).Return(nil)
 	mockAction.On("Perform").Return(nil)
 
 	postCommentCommand := PostCommentCommand{
@@ -103,7 +104,8 @@ func TestAddLabelsCommandWithPostCommentOnSuccess(t *testing.T) {
 	}
 
 	addLabelCommand := AddLabelsCommand{
-		LabelInfo: mockLabeler.LabelInfo,
+		EventInfo: mockLabeler.EventInfo,
+		Labels:    mockLabeler.Labels,
 		Labeler:   mockLabeler,
 		onSuccess: postCommentCommand,
 	}
@@ -122,8 +124,8 @@ func TestAddLabelsCommandWithPostCommentOnError(t *testing.T) {
 	mockAction := new(MockAction)
 
 	expectedError := errors.New("failed to add label")
-	mockLabeler.On("AddLabels", mockLabeler.LabelInfo).Return(expectedError)
-	mockCommenter.On("PostComment", mockCommenter.CommentInfo).Return(nil)
+	mockLabeler.On("AddLabels", mockLabeler.EventInfo, mockLabeler.Labels).Return(expectedError)
+	mockCommenter.On("PostComment", mockCommenter.EventInfo).Return(nil)
 	mockAction.On("Perform").Return(nil)
 
 	postCommentCommand := PostCommentCommand{
@@ -132,7 +134,8 @@ func TestAddLabelsCommandWithPostCommentOnError(t *testing.T) {
 	}
 
 	addLabelCommand := AddLabelsCommand{
-		LabelInfo: mockLabeler.LabelInfo,
+		EventInfo: mockLabeler.EventInfo,
+		Labels:    mockLabeler.Labels,
 		Labeler:   mockLabeler,
 		onSuccess: postCommentCommand,
 	}

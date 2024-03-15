@@ -21,19 +21,14 @@ func newGitHubClient(token string) *GitHubClient {
 	return &GitHubClient{client: github.NewClient(tc)}
 }
 
-type Client interface {
-	postComment(owner, repo string, number int, body string) error
-	addLabels(owner, repo string, number int, labels []string) error
-}
-
-func (g *GitHubClient) PostComment(info app.CommentInfo) error {
+func (g *GitHubClient) PostComment(info app.EventInfo) error {
 	comment := &github.IssueComment{Body: &info.Body}
 	_, _, err := g.client.Issues.CreateComment(context.Background(), info.Owner, info.Repo, info.Number, comment)
 	return err
 }
 
-func (g *GitHubClient) AddLabels(info app.LabelInfo) error {
-	_, _, err := g.client.Issues.AddLabelsToIssue(context.Background(), info.Owner, info.Repo, info.Number, info.Labels)
+func (g *GitHubClient) AddLabels(info app.EventInfo, labels app.Labels) error {
+	_, _, err := g.client.Issues.AddLabelsToIssue(context.Background(), info.Owner, info.Repo, info.Number, labels)
 
 	return err
 }
