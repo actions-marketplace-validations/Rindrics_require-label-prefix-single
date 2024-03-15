@@ -3,6 +3,7 @@ package infra
 import (
 	"context"
 
+	"github.com/Rindrics/require-label-prefix-on-closed/app"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
@@ -25,15 +26,14 @@ type Client interface {
 	addLabels(owner, repo string, number int, labels []string) error
 }
 
-func (g *GitHubClient) postComment(owner, repo string, number int, body string) error {
-	comment := &github.IssueComment{Body: &body}
-
-	_, _, err := g.client.Issues.CreateComment(context.Background(), owner, repo, number, comment)
+func (g *GitHubClient) PostComment(info app.CommentInfo) error {
+	comment := &github.IssueComment{Body: &info.Body}
+	_, _, err := g.client.Issues.CreateComment(context.Background(), info.Owner, info.Repo, info.Number, comment)
 	return err
 }
 
-func (g *GitHubClient) addLabels(owner, repo string, number int, labels []string) error {
-	_, _, err := g.client.Issues.AddLabelsToIssue(context.Background(), owner, repo, number, labels)
+func (g *GitHubClient) AddLabels(info app.LabelInfo) error {
+	_, _, err := g.client.Issues.AddLabelsToIssue(context.Background(), info.Owner, info.Repo, info.Number, info.Labels)
 
 	return err
 }

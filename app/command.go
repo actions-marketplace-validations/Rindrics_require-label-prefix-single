@@ -5,9 +5,9 @@ type Command interface {
 }
 
 type CommentInfo struct {
-	owner, repo string
-	number      int
-	body        string
+	Owner, Repo string
+	Number      int
+	Body        string
 }
 
 type Commenter interface {
@@ -34,9 +34,9 @@ func (c *PostCommentCommand) Perform() error {
 }
 
 type LabelInfo struct {
-	owner, repo string
-	number      int
-	labels      []string
+	Owner, Repo string
+	Number      int
+	Labels      []string
 }
 
 type Labeler interface {
