@@ -3,8 +3,8 @@ package domain
 import "strings"
 
 type RequiredLabel struct {
-	prefix    string
-	separator string
+	Prefix    string
+	Separator string
 }
 
 func getLabelPrefix(label string, separator string) string {
@@ -15,9 +15,9 @@ func getLabelPrefix(label string, separator string) string {
 	return strings.Split(label, separator)[0]
 }
 
-func (l *RequiredLabel) DoExist(labels []string) bool {
+func (l *RequiredLabel) DoExist(labels Labels) bool {
 	for _, label := range labels {
-		if l.prefix == getLabelPrefix(label, l.separator) {
+		if l.Prefix == getLabelPrefix(label, l.Separator) {
 			return true
 		}
 	}

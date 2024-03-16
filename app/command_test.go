@@ -8,11 +8,11 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type MockAction struct {
+type MockExitAction struct {
 	mock.Mock
 }
 
-func (m *MockAction) Perform() error {
+func (m *MockExitAction) Perform() error {
 	args := m.Called()
 	return args.Error(0)
 }
@@ -39,7 +39,7 @@ func (m *MockLabeler) AddLabels(p AddLabelsParams) error {
 
 type MockCommand struct {
 	mock.Mock
-	onSuccess Action
+	OnSuccess MockExitAction
 }
 
 func (m *MockCommand) Execute() error {
@@ -53,94 +53,94 @@ func (m *MockCommand) Perform() error {
 
 func TestPostCommentCommand(t *testing.T) {
 	mockCommenter := new(MockCommenter)
-	mockAction := new(MockAction)
+	mockExitAction := new(MockExitAction)
 
 	mockCommenter.On("PostComment", mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil)
-	mockAction.On("Perform").Return(nil)
+	mockExitAction.On("Perform").Return(nil)
 
 	command := PostCommentCommand{
 		Commenter: mockCommenter,
-		onSuccess: mockAction,
+		OnSuccess: mockExitAction,
 	}
 	err := command.Execute()
 
 	mockCommenter.AssertExpectations(t)
-	mockAction.AssertExpectations(t)
+	mockExitAction.AssertExpectations(t)
 	assert.NoError(t, err)
 }
 
 func TestPostCommentCommandError(t *testing.T) {
 	mockCommenter := new(MockCommenter)
-	mockAction := new(MockAction)
+	mockExitAction := new(MockExitAction)
 
 	expectedError := errors.New("failed to post comment")
 	mockCommenter.On("PostComment", mockCommenter.PostCommentParams).Return(expectedError)
-	mockAction.On("Perform").Return(nil)
+	mockExitAction.On("Perform").Return(nil)
 
 	command := PostCommentCommand{
 		Commenter: mockCommenter,
-		onSuccess: mockAction,
+		OnSuccess: mockExitAction,
 	}
 	err := command.Execute()
 
 	mockCommenter.AssertExpectations(t)
-	mockAction.AssertNotCalled(t, "Perform")
+	mockExitAction.AssertNotCalled(t, "Perform")
 	assert.ErrorIs(t, err, expectedError)
 }
 
 func TestAddLabelsCommandWithPostCommentOnSuccess(t *testing.T) {
 	mockLabeler := new(MockLabeler)
 	mockCommenter := new(MockCommenter)
-	mockAction := new(MockAction)
+	mockExitAction := new(MockExitAction)
 
 	mockLabeler.On("AddLabels", mockLabeler.AddLabelsParams).Return(nil)
 	mockCommenter.On("PostComment", mockCommenter.PostCommentParams).Return(nil)
-	mockAction.On("Perform").Return(nil)
+	mockExitAction.On("Perform").Return(nil)
 
 	postCommentCommand := PostCommentCommand{
 		Commenter: mockCommenter,
-		onSuccess: mockAction,
+		OnSuccess: mockExitAction,
 	}
 
 	addLabelCommand := AddLabelsCommand{
 		Params:    mockLabeler.AddLabelsParams,
 		Labeler:   mockLabeler,
-		onSuccess: postCommentCommand,
+		OnSuccess: postCommentCommand,
 	}
 
 	err := addLabelCommand.Execute()
 
 	mockLabeler.AssertExpectations(t)
 	mockCommenter.AssertExpectations(t)
-	mockAction.AssertExpectations(t)
+	mockExitAction.AssertExpectations(t)
 	assert.NoError(t, err)
 }
 
 func TestAddLabelsCommandWithPostCommentOnError(t *testing.T) {
 	mockLabeler := new(MockLabeler)
 	mockCommenter := new(MockCommenter)
-	mockAction := new(MockAction)
+	mockExitAction := new(MockExitAction)
 
 	expectedError := errors.New("failed to add label")
 	mockLabeler.On("AddLabels", mockLabeler.AddLabelsParams).Return(expectedError)
 	mockCommenter.On("PostComment", mockCommenter.PostCommentParams).Return(nil)
-	mockAction.On("Perform").Return(nil)
+	mockExitAction.On("Perform").Return(nil)
 
 	postCommentCommand := PostCommentCommand{
 		Commenter: mockCommenter,
-		onSuccess: mockAction,
+		OnSuccess: mockExitAction,
 	}
 
 	addLabelCommand := AddLabelsCommand{
 		Params:    mockLabeler.AddLabelsParams,
 		Labeler:   mockLabeler,
-		onSuccess: postCommentCommand,
+		OnSuccess: postCommentCommand,
 	}
 
 	err := addLabelCommand.Execute()
 
 	mockLabeler.AssertExpectations(t)
 	mockCommenter.AssertNotCalled(t, "PostComment")
-	mockAction.AssertNotCalled(t, "Perform")
+	mockExitAction.AssertNotCalled(t, "Perform")
 	assert.ErrorIs(t, err, expectedError)
 }

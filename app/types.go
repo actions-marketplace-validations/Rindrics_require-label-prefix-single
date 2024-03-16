@@ -19,7 +19,7 @@ type Commenter interface {
 type PostCommentCommand struct {
 	Params    PostCommentParams
 	Commenter Commenter
-	onSuccess Action
+	OnSuccess Action
 }
 
 type Labeler interface {
@@ -35,5 +35,11 @@ type AddLabelsParams struct {
 type AddLabelsCommand struct {
 	Params    AddLabelsParams
 	Labeler   Labeler
-	onSuccess PostCommentCommand
+	OnSuccess PostCommentCommand
 }
+
+type Action interface {
+	Perform() error
+}
+
+type ExitAction struct{}

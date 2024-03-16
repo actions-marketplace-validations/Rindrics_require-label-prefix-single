@@ -38,31 +38,31 @@ func TestRequiredLabel(t *testing.T) {
 		{
 			name:     "Label found",
 			labels:   []string{"foo/bar", "bar/baz"},
-			rl:       RequiredLabel{prefix: "foo", separator: "/"},
+			rl:       RequiredLabel{Prefix: "foo", Separator: "/"},
 			expected: true,
 		},
 		{
 			name:     "Label not found",
 			labels:   []string{"baz/qux", "quux/corge"},
-			rl:       RequiredLabel{prefix: "foo", separator: "/"},
+			rl:       RequiredLabel{Prefix: "foo", Separator: "/"},
 			expected: false,
 		},
 		{
 			name:     "Empty label list",
 			labels:   []string{},
-			rl:       RequiredLabel{prefix: "foo", separator: "/"},
+			rl:       RequiredLabel{Prefix: "foo", Separator: "/"},
 			expected: false,
 		},
 		{
 			name:     "Prefix without separator",
 			labels:   []string{"foobar", "barbaz"},
-			rl:       RequiredLabel{prefix: "foo", separator: "/"},
+			rl:       RequiredLabel{Prefix: "foo", Separator: "/"},
 			expected: false,
 		},
 		{
 			name:     "Separator but no matching prefix",
 			labels:   []string{"baz/foo/qux", "bar/foo/baz"},
-			rl:       RequiredLabel{prefix: "qux", separator: "/"},
+			rl:       RequiredLabel{Prefix: "qux", Separator: "/"},
 			expected: false,
 		},
 	}

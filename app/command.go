@@ -6,7 +6,7 @@ func (c *PostCommentCommand) Execute() error {
 		return err
 	}
 
-	return c.onSuccess.Perform()
+	return c.OnSuccess.Perform()
 }
 
 func (c *PostCommentCommand) Perform() error {
@@ -18,5 +18,5 @@ func (c *AddLabelsCommand) Execute() error {
 		return err
 	}
 
-	return c.onSuccess.Execute()
+	return c.OnSuccess.Execute()
 }
