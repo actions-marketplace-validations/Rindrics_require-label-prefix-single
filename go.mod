@@ -1,4 +1,4 @@
-module github.com/Rindrics/require-label-prefix-on-closed
+module github.com/Rindrics/require-label-prefix
 
 go 1.22.1
 
