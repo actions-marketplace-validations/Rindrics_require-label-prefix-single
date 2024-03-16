@@ -1,22 +1,13 @@
 package app
 
+import "github.com/Rindrics/require-label-prefix-on-closed/domain"
+
 type Command interface {
 	Execute() error
 }
 
-type RepoInfo struct {
-	Owner, Repo string
-}
-
-type Labels []string
-
-type EventInfo struct {
-	Number int
-	Labels Labels
-}
-
 type PostCommentParams struct {
-	RepoInfo RepoInfo
+	RepoInfo domain.RepoInfo
 	Number   int
 	Body     string
 }
@@ -36,9 +27,9 @@ type Labeler interface {
 }
 
 type AddLabelsParams struct {
-	RepoInfo RepoInfo
+	RepoInfo domain.RepoInfo
 	Number   int
-	Labels   Labels
+	Labels   domain.Labels
 }
 
 type AddLabelsCommand struct {

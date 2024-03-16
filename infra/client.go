@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/Rindrics/require-label-prefix-on-closed/app"
+	"github.com/Rindrics/require-label-prefix-on-closed/domain"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
@@ -28,7 +29,7 @@ func (g *GitHubClient) PostComment(p app.PostCommentParams) error {
 	return err
 }
 
-func (g *GitHubClient) AddLabels(p app.AddLabelsParams, labels app.Labels) error {
+func (g *GitHubClient) AddLabels(p app.AddLabelsParams, labels domain.Labels) error {
 	_, _, err := g.client.Issues.AddLabelsToIssue(context.Background(), p.RepoInfo.Owner, p.RepoInfo.Repo, p.Number, labels)
 
 	return err
