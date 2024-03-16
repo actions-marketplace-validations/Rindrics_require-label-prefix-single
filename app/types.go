@@ -1,6 +1,6 @@
 package app
 
-import "github.com/Rindrics/require-label-prefix-on-closed/domain"
+import "github.com/Rindrics/require-label-prefix/domain"
 
 type Command interface {
 	Execute() error

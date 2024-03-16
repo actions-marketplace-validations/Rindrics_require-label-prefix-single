@@ -3,7 +3,7 @@ package infra
 import (
 	"context"
 
-	"github.com/Rindrics/require-label-prefix-on-closed/app"
+	"github.com/Rindrics/require-label-prefix/app"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
