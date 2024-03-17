@@ -1,6 +1,6 @@
-package app
+package application
 
-func (c *PostCommentCommand) Execute() error {
+func (c PostCommentCommand) Execute() error {
 	err := c.Commenter.PostComment(c.Params)
 	if err != nil {
 		return err
@@ -9,11 +9,11 @@ func (c *PostCommentCommand) Execute() error {
 	return c.OnSuccess.Perform()
 }
 
-func (c *PostCommentCommand) Perform() error {
+func (c PostCommentCommand) Perform() error {
 	return c.Execute()
 }
 
-func (c *AddLabelsCommand) Execute() error {
+func (c AddLabelsCommand) Execute() error {
 	if err := c.Labeler.AddLabels(c.Params); err != nil {
 		return err
 	}

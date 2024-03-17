@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/Rindrics/require-label-prefix/app"
+	"github.com/Rindrics/require-label-prefix/application"
 	"github.com/Rindrics/require-label-prefix/domain"
 	"github.com/Rindrics/require-label-prefix/infra"
 )
@@ -16,16 +16,16 @@ func main() {
 	logger := infra.ParseLogLevel(*logLevelFlag)
 
 	logger.Info("Loading webhook event")
-	e, err := infra.LoadEventFromEnv()
+	event, err := infra.LoadEventFromEnv()
 	if err != nil {
 		logger.Error("Failed to load event from environment", "error", err)
 		return
 	}
 
 	logger.Info("Parsing webhook event")
-	eventInfo := infra.ParseEvent(e, logger)
+	eventInfo := infra.ParseEvent(event, logger)
 
-	config := NewConfig()
+	config := application.NewConfig()
 
 	logger.Debug("event info", "number", eventInfo.Number, "labels", eventInfo.Labels)
 
@@ -43,50 +43,6 @@ func main() {
 	logger.Info("Label not found")
 	client := infra.NewGitHubClient(config.Token)
 
-	if config.AddLabel {
-		logger.Info("Adding label")
-		ac := app.AddLabelsCommand{
-			Labeler: client,
-			Params: app.AddLabelsParams{
-				Number: eventInfo.Number,
-				Labels: []string{config.DefaultLabel},
-			},
-			OnSuccess: app.PostCommentCommand{
-				Commenter: client,
-				Params: app.PostCommentParams{
-					RepoInfo: domain.RepoInfo{
-						Owner: config.Owner,
-						Repo:  config.Repository,
-					},
-					Number: eventInfo.Number,
-					Body:   "Label added",
-				},
-			},
-		}
-		err := ac.Execute()
-		if err != nil {
-			logger.Error("Failed to add label", "error", err)
-			return
-		}
-	} else {
-		logger.Info("Post comment without adding label")
-		pc := app.PostCommentCommand{
-			Commenter: client,
-			Params: app.PostCommentParams{
-				RepoInfo: domain.RepoInfo{
-					Owner: config.Owner,
-					Repo:  config.Repository,
-				},
-				Number: eventInfo.Number,
-				Body:   config.Comment,
-			},
-			OnSuccess: &app.ExitAction{},
-		}
-		err := pc.Execute()
-		if err != nil {
-			logger.Error("Failed to post comment", "error", err)
-			return
-		}
-
-	}
+	app := application.New(eventInfo, client, *config, logger)
+	app.Run()
 }
