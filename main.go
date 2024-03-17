@@ -25,7 +25,7 @@ func main() {
 	logger.Info("Parsing webhook event")
 	eventInfo := infra.ParseEvent(e, logger)
 
-	config := NewConfig()
+	config := application.NewConfig()
 
 	logger.Debug("event info", "number", eventInfo.Number, "labels", eventInfo.Labels)
 
