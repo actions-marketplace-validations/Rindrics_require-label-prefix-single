@@ -16,14 +16,14 @@ func main() {
 	logger := infra.ParseLogLevel(*logLevelFlag)
 
 	logger.Info("Loading webhook event")
-	e, err := infra.LoadEventFromEnv()
+	event, err := infra.LoadEventFromEnv()
 	if err != nil {
 		logger.Error("Failed to load event from environment", "error", err)
 		return
 	}
 
 	logger.Info("Parsing webhook event")
-	eventInfo := infra.ParseEvent(e, logger)
+	eventInfo := infra.ParseEvent(event, logger)
 
 	config := application.NewConfig()
 
