@@ -43,50 +43,6 @@ func main() {
 	logger.Info("Label not found")
 	client := infra.NewGitHubClient(config.Token)
 
-	if config.AddLabel {
-		logger.Info("Adding label")
-		ac := application.AddLabelsCommand{
-			Labeler: client,
-			Params: application.AddLabelsParams{
-				Number: eventInfo.Number,
-				Labels: []string{config.DefaultLabel},
-			},
-			OnSuccess: application.PostCommentCommand{
-				Commenter: client,
-				Params: application.PostCommentParams{
-					RepoInfo: domain.RepoInfo{
-						Owner: config.Owner,
-						Repo:  config.Repository,
-					},
-					Number: eventInfo.Number,
-					Body:   "Label added",
-				},
-			},
-		}
-		err := ac.Execute()
-		if err != nil {
-			logger.Error("Failed to add label", "error", err)
-			return
-		}
-	} else {
-		logger.Info("Post comment without adding label")
-		pc := application.PostCommentCommand{
-			Commenter: client,
-			Params: application.PostCommentParams{
-				RepoInfo: domain.RepoInfo{
-					Owner: config.Owner,
-					Repo:  config.Repository,
-				},
-				Number: eventInfo.Number,
-				Body:   config.Comment,
-			},
-			OnSuccess: &application.ExitAction{},
-		}
-		err := pc.Execute()
-		if err != nil {
-			logger.Error("Failed to post comment", "error", err)
-			return
-		}
-
-	}
+	app := application.New(eventInfo, client, *config, logger)
+	app.Run()
 }

@@ -1,9 +1,22 @@
 package application
 
-import "github.com/Rindrics/require-label-prefix/domain"
+import (
+	"github.com/Rindrics/require-label-prefix/domain"
+)
 
 type Command interface {
 	Execute() error
+}
+
+type App struct {
+	Command Command
+	Logger  Logger
+}
+
+type Logger interface {
+	Debug(string, ...any)
+	Info(string, ...any)
+	Error(string, ...any)
 }
 
 type PostCommentParams struct {
@@ -43,3 +56,8 @@ type Action interface {
 }
 
 type ExitAction struct{}
+
+type GitHubClient interface {
+	PostComment(params PostCommentParams) error
+	AddLabels(params AddLabelsParams) error
+}
