@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/Rindrics/require-label-prefix/app"
+	"github.com/Rindrics/require-label-prefix/application"
 	"github.com/Rindrics/require-label-prefix/domain"
 	"github.com/Rindrics/require-label-prefix/infra"
 )
@@ -45,15 +45,15 @@ func main() {
 
 	if config.AddLabel {
 		logger.Info("Adding label")
-		ac := app.AddLabelsCommand{
+		ac := application.AddLabelsCommand{
 			Labeler: client,
-			Params: app.AddLabelsParams{
+			Params: application.AddLabelsParams{
 				Number: eventInfo.Number,
 				Labels: []string{config.DefaultLabel},
 			},
-			OnSuccess: app.PostCommentCommand{
+			OnSuccess: application.PostCommentCommand{
 				Commenter: client,
-				Params: app.PostCommentParams{
+				Params: application.PostCommentParams{
 					RepoInfo: domain.RepoInfo{
 						Owner: config.Owner,
 						Repo:  config.Repository,
@@ -70,9 +70,9 @@ func main() {
 		}
 	} else {
 		logger.Info("Post comment without adding label")
-		pc := app.PostCommentCommand{
+		pc := application.PostCommentCommand{
 			Commenter: client,
-			Params: app.PostCommentParams{
+			Params: application.PostCommentParams{
 				RepoInfo: domain.RepoInfo{
 					Owner: config.Owner,
 					Repo:  config.Repository,
@@ -80,7 +80,7 @@ func main() {
 				Number: eventInfo.Number,
 				Body:   config.Comment,
 			},
-			OnSuccess: &app.ExitAction{},
+			OnSuccess: &application.ExitAction{},
 		}
 		err := pc.Execute()
 		if err != nil {

@@ -1,4 +1,4 @@
-package app
+package application
 
 func (c *PostCommentCommand) Execute() error {
 	err := c.Commenter.PostComment(c.Params)
