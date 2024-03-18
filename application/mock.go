@@ -1,6 +1,8 @@
 package application
 
-import "github.com/stretchr/testify/mock"
+import (
+	"github.com/stretchr/testify/mock"
+)
 
 type MockExitAction struct {
 	mock.Mock
@@ -43,4 +45,20 @@ func (m *MockCommand) Execute() error {
 
 func (m *MockCommand) Perform() error {
 	return m.Execute()
+}
+
+type MockLogger struct {
+	mock.Mock
+}
+
+func (m *MockLogger) Info(msg string, args ...interface{}) {
+	m.Called(msg, args)
+}
+
+func (m *MockLogger) Debug(msg string, args ...interface{}) {
+	m.Called(msg, args)
+}
+
+func (m *MockLogger) Error(msg string, args ...interface{}) {
+	m.Called(msg, args)
 }
