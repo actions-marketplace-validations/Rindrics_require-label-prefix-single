@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.8](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.7...v0.0.8) - 2024-03-18
+- Lowercase variable names by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/25
+
 ## [v0.0.7](https://github.com/Rindrics/require-label-prefix/compare/v0.0.6...v0.0.7) - 2024-03-18
 - Use `action.yml` for tagpr version file to provide latest version by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/23
 
