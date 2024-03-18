@@ -1,27 +1,27 @@
 name: 'Require Label Prefix Single'
 description: 'Add label or post comment to the issue/PR just emitted an event'
 inputs:
-  REPOSITORY_FULL_NAME:
+  repository_full_name:
     description: 'Name of GitHub repository in "owner/repository" format'
     required: true
-  TOKEN:
+  token:
     description: 'Secret for GitHub API'
     required: true
-  LABEL_PREFIX:
+  label_prefix:
     description: 'Label prefix to require'
     required: true
-  LABEL_SEPARATOR:
+  label_separator:
     description: 'Character that separates between required prefix and label body'
     default: '/'
     required: false
-  ADD_LABEL:
+  add_label:
     description: 'Whether or not to add a label if the prefix is missing'
     default: 'false'
     required: false
-  DEFAULT_LABEL:
+  default_label:
     description: 'Default label to add when "ADD_LABEL = true"'
     required: false
-  COMMENT:
+  comment:
     description: 'Content to be posted post when "ADD_LABEL = false"'
     default: 'false'
     required: false
