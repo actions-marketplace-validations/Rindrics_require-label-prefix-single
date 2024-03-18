@@ -7,9 +7,11 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 
-FROM scratch
+FROM alpine:3.19
 
 LABEL org.opencontainers.image.source="https://github.com/Rindrics/require-label-prefix-single"
+
+RUN apk update && apk --no-cache add ca-certificates
 
 COPY --from=builder /dist/app /app
 
