@@ -20,13 +20,13 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	repositoryFullName := os.Getenv("repository_full_name")
-	token := os.Getenv("token")
-	addLabel := env.GetBoolDefault("add_label", true)
-	defaultLabel := env.GetDefault("default_label", "label-required")
-	prefix := env.GetDefault("label_prefix", "prefix")
-	separator := env.GetDefault("label_separator", "/")
-	comment := env.GetDefault("comment", "Add a label with a prefix.")
+	repositoryFullName := os.Getenv("GITHUB_REPOSITORY")
+	token := os.Getenv("INPUT_TOKEN")
+	addLabel := env.GetBoolDefault("INPUT_ADD_LABEL", true)
+	defaultLabel := env.GetDefault("INPUT_DEFAULT_LABEL", "label-required")
+	prefix := env.GetDefault("INPUT_LABEL_PREFIX", "prefix")
+	separator := env.GetDefault("INPUT_LABEL_SEPARATOR", "/")
+	comment := env.GetDefault("INPUT_COMMENT", "Add a label with a prefix.")
 
 	parts := strings.Split(repositoryFullName, "/")
 	if len(parts) != 2 {
