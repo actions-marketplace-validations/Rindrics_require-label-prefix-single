@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.13](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.12...v0.0.13) - 2024-03-18
+- Add logger to client by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/36
+
 ## [v0.0.12](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.11...v0.0.12) - 2024-03-18
 - Add server certificates to resolve X509 error by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/33
 - `Exit(1)` when error occurd during `app.Run()` by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/35
