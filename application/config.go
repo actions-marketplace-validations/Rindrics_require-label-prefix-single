@@ -20,17 +20,17 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	repositoryFullName := os.Getenv("REPOSITORY_FULL_NAME")
-	token := os.Getenv("TOKEN")
-	addLabel := env.GetBoolDefault("ADD_LABEL", true)
-	defaultLabel := env.GetDefault("DEFAULT_LABEL", "label-required")
-	prefix := env.GetDefault("LABEL_PREFIX", "prefix")
-	separator := env.GetDefault("LABEL_SEPARATOR", "/")
-	comment := env.GetDefault("COMMENT", "Add a label with a prefix.")
+	repositoryFullName := os.Getenv("repository_full_name")
+	token := os.Getenv("token")
+	addLabel := env.GetBoolDefault("add_label", true)
+	defaultLabel := env.GetDefault("default_label", "label-required")
+	prefix := env.GetDefault("label_prefix", "prefix")
+	separator := env.GetDefault("label_separator", "/")
+	comment := env.GetDefault("comment", "Add a label with a prefix.")
 
 	parts := strings.Split(repositoryFullName, "/")
 	if len(parts) != 2 {
-		log.Fatalf("REPOSITORY_FULL_NAME must be in 'owner/repo' format, got: %s", repositoryFullName)
+		log.Fatalf("repository_full_name must be in 'owner/repo' format, got: %s", repositoryFullName)
 	}
 
 	return &Config{

@@ -10,13 +10,13 @@ func TestNewConfig(t *testing.T) {
 	t.Run("should return a new Config", func(t *testing.T) {
 		// Setup environmental valiables
 		//   wille be cleaned up after the test
-		os.Setenv("REPOSITORY_FULL_NAME", "octocat/sandbox")
-		os.Setenv("TOKEN", "abcdefghijklmnopqrstuvwxyz1234567890")
-		os.Setenv("ADD_LABEL", "true")
-		os.Setenv("DEFAULT_LABEL", "MyGreatLabel")
-		os.Setenv("LABEL_PREFIX", "foo")
-		os.Setenv("LABEL_SEPARATOR", "/")
-		os.Setenv("COMMENT", "This is a test comment.")
+		os.Setenv("repository_full_name", "octocat/sandbox")
+		os.Setenv("token", "abcdefghijklmnopqrstuvwxyz1234567890")
+		os.Setenv("add_label", "true")
+		os.Setenv("default_label", "MyGreatLabel")
+		os.Setenv("label_prefix", "foo")
+		os.Setenv("label_separator", "/")
+		os.Setenv("comment", "This is a test comment.")
 
 		config := NewConfig()
 
@@ -36,12 +36,12 @@ func TestNewConfig(t *testing.T) {
 		}
 
 		// Clean up environmental variables
-		os.Unsetenv("REPOSITORY_FULL_NAME")
-		os.Unsetenv("TOKEN")
-		os.Unsetenv("ADD_LABEL")
-		os.Unsetenv("DEFAULT_LABEL")
-		os.Unsetenv("LABEL_PREFIX")
-		os.Unsetenv("LABEL_SEPARATOR")
-		os.Unsetenv("COMMENT")
+		os.Unsetenv("repository_full_name")
+		os.Unsetenv("token")
+		os.Unsetenv("add_label")
+		os.Unsetenv("default_label")
+		os.Unsetenv("label_prefix")
+		os.Unsetenv("label_separator")
+		os.Unsetenv("comment")
 	})
 }
