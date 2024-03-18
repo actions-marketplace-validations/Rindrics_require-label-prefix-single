@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.14](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.13...v0.0.14) - 2024-03-18
+- Improve logging by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/38
+
 ## [v0.0.13](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.12...v0.0.13) - 2024-03-18
 - Add logger to client by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/36
 
