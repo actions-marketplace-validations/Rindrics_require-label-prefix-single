@@ -4,9 +4,9 @@ import (
 	"flag"
 	"os"
 
-	"github.com/Rindrics/require-label-prefix/application"
-	"github.com/Rindrics/require-label-prefix/domain"
-	"github.com/Rindrics/require-label-prefix/infra"
+	"github.com/Rindrics/require-label-prefix-single/application"
+	"github.com/Rindrics/require-label-prefix-single/domain"
+	"github.com/Rindrics/require-label-prefix-single/infra"
 )
 
 func main() {

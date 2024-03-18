@@ -1,7 +1,7 @@
 package application
 
 import (
-	"github.com/Rindrics/require-label-prefix/domain"
+	"github.com/Rindrics/require-label-prefix-single/domain"
 )
 
 type Command interface {

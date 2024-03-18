@@ -1,4 +1,4 @@
-name: 'Require Label Prefix'
+name: 'Require Label Prefix Single'
 description: 'Add label or post comment to the issue/PR just emitted an event'
 inputs:
   REPOSITORY_FULL_NAME:
@@ -27,4 +27,4 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/rindrics/require-label-prefix:0.0.0'
+  image: 'docker://ghcr.io/rindrics/require-label-prefix-single:0.0.0'
