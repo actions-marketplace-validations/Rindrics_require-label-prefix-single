@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.4](https://github.com/Rindrics/require-label-prefix/compare/v0.0.3...v0.0.4) - 2024-03-18
+- Lowercase repo name using bash by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/17
+
 ## [v0.0.3](https://github.com/Rindrics/require-label-prefix/compare/v0.0.2...v0.0.3) - 2024-03-18
 - Release to ghcr.io by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/15
 
