@@ -55,7 +55,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ steps.lowercase-repaname.outputs.IMAGE }}:${{ env.TAG }}
+        tags: ghcr.io/${{ steps.lowercase-reponame.outputs.IMAGE }}:${{ env.TAG }}
 
     - name: Image push completed
       run: echo "Docker image ${{ env.TAG }} has been pushed to ghcr.io"
