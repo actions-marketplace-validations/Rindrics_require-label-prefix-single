@@ -30,7 +30,7 @@ func NewConfig() *Config {
 
 	parts := strings.Split(repositoryFullName, "/")
 	if len(parts) != 2 {
-		log.Fatalf("repository_full_name must be in 'owner/repo' format, got: %s", repositoryFullName)
+		log.Fatalf("'repository_full_name' must be in 'owner/repo' format, got: %s", repositoryFullName)
 	}
 
 	return &Config{
