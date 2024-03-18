@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.6](https://github.com/Rindrics/require-label-prefix/compare/v0.0.5...v0.0.6) - 2024-03-18
+- Prepare for publishing to GitHub marketplace by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/21
+
 ## [v0.0.5](https://github.com/Rindrics/require-label-prefix/compare/v0.0.4...v0.0.5) - 2024-03-18
 - Fix typo by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/19
 
