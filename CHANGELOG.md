@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.7](https://github.com/Rindrics/require-label-prefix/compare/v0.0.6...v0.0.7) - 2024-03-18
+- Use `action.yml` for tagpr version file to provide latest version by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/23
+
 ## [v0.0.6](https://github.com/Rindrics/require-label-prefix/compare/v0.0.5...v0.0.6) - 2024-03-18
 - Prepare for publishing to GitHub marketplace by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/21
 
