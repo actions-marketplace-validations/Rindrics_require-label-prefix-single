@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.11](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.10...v0.0.11) - 2024-03-18
+- Correct method call to resolve infinite loop by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/31
+
 ## [v0.0.10](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.9...v0.0.10) - 2024-03-18
 - Fix name of envvars by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/29
 
