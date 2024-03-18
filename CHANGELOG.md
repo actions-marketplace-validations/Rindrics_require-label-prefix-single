@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.5](https://github.com/Rindrics/require-label-prefix/compare/v0.0.4...v0.0.5) - 2024-03-18
+- Fix typo by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/19
+
 ## [v0.0.4](https://github.com/Rindrics/require-label-prefix/compare/v0.0.3...v0.0.4) - 2024-03-18
 - Lowercase repo name using bash by @Rindrics in https://github.com/Rindrics/require-label-prefix/pull/17
 
