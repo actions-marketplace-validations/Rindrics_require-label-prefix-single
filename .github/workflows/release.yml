@@ -45,13 +45,17 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - id: lowercase-reponame
+      run: |
+        echo "IMAGE=${GITHUB_REPOSITORY@L}" >> $GITHUB_OUTPUT
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ github.repository }}:${{ env.TAG }}
+        tags: ghcr.io/${{ steps.lowercase-repaname.outputs.IMAGE }}:${{ env.TAG }}
 
     - name: Image push completed
       run: echo "Docker image ${{ env.TAG }} has been pushed to ghcr.io"
