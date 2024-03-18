@@ -7,7 +7,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/Rindrics/require-label-prefix/domain"
+	"github.com/Rindrics/require-label-prefix-single/domain"
 	"github.com/google/go-github/github"
 )
 

@@ -1,4 +1,4 @@
-module github.com/Rindrics/require-label-prefix
+module github.com/Rindrics/require-label-prefix-single
 
 go 1.22.1
 

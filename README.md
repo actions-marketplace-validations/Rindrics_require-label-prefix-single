@@ -1,4 +1,4 @@
-# require-label-prefix
+# require-label-prefix-single
 
 Inspired by: [trstringer/require-label-prefix](https://github.com/trstringer/require-label-prefix)
 

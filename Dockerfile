@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 FROM scratch
 
-LABEL org.opencontainers.image.source="https://github.com/Rindrics/require-label-prefix"
+LABEL org.opencontainers.image.source="https://github.com/Rindrics/require-label-prefix-single"
 
 COPY --from=builder /dist/app /app
 
