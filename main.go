@@ -22,6 +22,7 @@ func main() {
 	eventInfo := infra.ParseEvent(event, logger)
 
 	config := application.NewConfig()
+	logger.Debug("config", "loaded", config)
 
 	logger.Debug("event info", "number", eventInfo.Number, "labels", eventInfo.Labels)
 
@@ -32,11 +33,11 @@ func main() {
 
 	found := rl.DoExist(eventInfo.Labels)
 	if found {
-		logger.Info("Label found")
+		logger.Info("found label with required prefix")
 		os.Exit(0)
 	}
 
-	logger.Info("Label not found")
+	logger.Info("label with required prefix not found")
 	client := infra.NewGitHubClient(config.Token, logger)
 
 	app := application.New(eventInfo, client, *config, logger)
