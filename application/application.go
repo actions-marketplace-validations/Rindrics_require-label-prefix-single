@@ -52,6 +52,7 @@ func (a App) Run() error {
 	err := a.Command.Execute()
 	if err != nil {
 		a.Logger.Error("Error executing command", err)
+		return err
 	}
 	a.Logger.Info("command executed successfully")
 	return nil

@@ -44,5 +44,9 @@ func main() {
 	client := infra.NewGitHubClient(config.Token)
 
 	app := application.New(eventInfo, client, *config, logger)
-	app.Run()
+	err = app.Run()
+	if err != nil {
+		logger.Error("Error running application", "error", err)
+		os.Exit(1)
+	}
 }
