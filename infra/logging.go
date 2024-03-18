@@ -6,7 +6,9 @@ import (
 	"log/slog"
 )
 
-func ParseLogLevel(l string) *slog.Logger {
+func ParseLogLevel() *slog.Logger {
+	l := os.Getenv("INPUT_LOG_LEVEL")
+
 	var ll slog.Level
 	switch l {
 	case "debug":

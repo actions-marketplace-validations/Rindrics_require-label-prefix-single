@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"os"
 
 	"github.com/Rindrics/require-label-prefix-single/application"
@@ -10,10 +9,7 @@ import (
 )
 
 func main() {
-	logLevelFlag := flag.String("log-level", "info", "Set the logging level (debug, info, warn, error)")
-	flag.Parse()
-
-	logger := infra.ParseLogLevel(*logLevelFlag)
+	logger := infra.ParseLogLevel()
 
 	logger.Info("Loading webhook event")
 	event, err := infra.LoadEventFromEnv()
@@ -41,7 +37,7 @@ func main() {
 	}
 
 	logger.Info("Label not found")
-	client := infra.NewGitHubClient(config.Token)
+	client := infra.NewGitHubClient(config.Token, logger)
 
 	app := application.New(eventInfo, client, *config, logger)
 	err = app.Run()

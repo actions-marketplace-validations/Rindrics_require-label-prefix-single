@@ -25,6 +25,10 @@ inputs:
     description: 'Content to be posted post when "ADD_LABEL = false"'
     default: 'false'
     required: false
+  log_level:
+    description: 'one of: debug, info, warn, error (default: info)'
+    default: 'info'
+    required: false
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/rindrics/require-label-prefix-single:v0.0.12'
