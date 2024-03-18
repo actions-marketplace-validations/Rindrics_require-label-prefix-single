@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.9](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.8...v0.0.9) - 2024-03-18
+- Add version prefix to resolve 'manifest unknown' error by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/27
+
 ## [v0.0.8](https://github.com/Rindrics/require-label-prefix-single/compare/v0.0.7...v0.0.8) - 2024-03-18
 - Lowercase variable names by @Rindrics in https://github.com/Rindrics/require-label-prefix-single/pull/25
 
