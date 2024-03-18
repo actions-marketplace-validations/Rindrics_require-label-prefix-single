@@ -3,7 +3,6 @@ package infra
 import (
 	"testing"
 
-	"github.com/caitlinelfring/go-env-default"
 	"github.com/google/go-github/github"
 )
 
@@ -23,5 +22,5 @@ func TestParseEvent(t *testing.T) {
 		},
 	}
 
-	ParseEvent(&event, ParseLogLevel(env.GetDefault("LOG_LEVEL", "info")))
+	ParseEvent(&event, ParseLogLevel())
 }
