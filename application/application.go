@@ -49,9 +49,10 @@ func New(info domain.EventInfo, client GitHubClient, config Config, logger Logge
 
 func (a App) Run() error {
 	a.Logger.Info("start executing command")
-	err := a.Run()
+	err := a.Command.Execute()
 	if err != nil {
 		a.Logger.Error("Error executing command", err)
 	}
+	a.Logger.Info("command executed successfully")
 	return nil
 }
