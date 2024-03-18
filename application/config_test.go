@@ -10,13 +10,13 @@ func TestNewConfig(t *testing.T) {
 	t.Run("should return a new Config", func(t *testing.T) {
 		// Setup environmental valiables
 		//   wille be cleaned up after the test
-		os.Setenv("repository_full_name", "octocat/sandbox")
-		os.Setenv("token", "abcdefghijklmnopqrstuvwxyz1234567890")
-		os.Setenv("add_label", "true")
-		os.Setenv("default_label", "MyGreatLabel")
-		os.Setenv("label_prefix", "foo")
-		os.Setenv("label_separator", "/")
-		os.Setenv("comment", "This is a test comment.")
+		os.Setenv("GITHUB_REPOSITORY", "octocat/sandbox")
+		os.Setenv("INPUT_TOKEN", "abcdefghijklmnopqrstuvwxyz1234567890")
+		os.Setenv("INPUT_ADD_LABEL", "true")
+		os.Setenv("INPUT_DEFAULT_LABEL", "MyGreatLabel")
+		os.Setenv("INPUT_LABEL_PREFIX", "foo")
+		os.Setenv("INPUT_LABEL_SEPARATOR", "/")
+		os.Setenv("INPUT_COMMENT", "This is a test comment.")
 
 		config := NewConfig()
 
@@ -36,12 +36,12 @@ func TestNewConfig(t *testing.T) {
 		}
 
 		// Clean up environmental variables
-		os.Unsetenv("repository_full_name")
-		os.Unsetenv("token")
-		os.Unsetenv("add_label")
-		os.Unsetenv("default_label")
-		os.Unsetenv("label_prefix")
-		os.Unsetenv("label_separator")
-		os.Unsetenv("comment")
+		os.Unsetenv("GITHUB_REPOSITORY")
+		os.Unsetenv("INPUT_TOKEN")
+		os.Unsetenv("INPUT_ADD_LABEL")
+		os.Unsetenv("INPUT_DEFAULT_LABEL")
+		os.Unsetenv("INPUT_LABEL_PREFIX")
+		os.Unsetenv("INPUT_LABEL_SEPARATOR")
+		os.Unsetenv("INPUT_COMMENT")
 	})
 }
