@@ -14,8 +14,8 @@ func TestNewConfig(t *testing.T) {
 		os.Setenv("TOKEN", "abcdefghijklmnopqrstuvwxyz1234567890")
 		os.Setenv("ADD_LABEL", "true")
 		os.Setenv("DEFAULT_LABEL", "MyGreatLabel")
-		os.Setenv("PREFIX", "foo")
-		os.Setenv("SEPARATOR", "/")
+		os.Setenv("LABEL_PREFIX", "foo")
+		os.Setenv("LABEL_SEPARATOR", "/")
 		os.Setenv("COMMENT", "This is a test comment.")
 
 		config := NewConfig()
@@ -40,8 +40,8 @@ func TestNewConfig(t *testing.T) {
 		os.Unsetenv("TOKEN")
 		os.Unsetenv("ADD_LABEL")
 		os.Unsetenv("DEFAULT_LABEL")
-		os.Unsetenv("PREFIX")
-		os.Unsetenv("SEPARATOR")
+		os.Unsetenv("LABEL_PREFIX")
+		os.Unsetenv("LABEL_SEPARATOR")
 		os.Unsetenv("COMMENT")
 	})
 }

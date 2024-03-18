@@ -1,0 +1,30 @@
+name: 'Require Label Prefix'
+description: 'Add label or post comment to the issue/PR just emitted an event'
+inputs:
+  REPOSITORY_FULL_NAME:
+    description: 'Name of GitHub repository in "owner/repository" format'
+    required: true
+  TOKEN:
+    description: 'Secret for GitHub API'
+    required: true
+  LABEL_PREFIX:
+    description: 'Label prefix to require'
+    required: true
+  LABEL_SEPARATOR:
+    description: 'Character that separates between required prefix and label body'
+    default: '/'
+    required: false
+  ADD_LABEL:
+    description: 'Whether or not to add a label if the prefix is missing'
+    default: 'false'
+    required: false
+  DEFAULT_LABEL:
+    description: 'Default label to add when "ADD_LABEL = true"'
+    required: false
+  COMMENT:
+    description: 'Content to be posted post when "ADD_LABEL = false"'
+    default: 'false'
+    required: false
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/rindrics/require-label-prefix:0.0.0'

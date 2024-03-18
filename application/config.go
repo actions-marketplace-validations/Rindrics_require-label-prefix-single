@@ -24,8 +24,8 @@ func NewConfig() *Config {
 	token := os.Getenv("TOKEN")
 	addLabel := env.GetBoolDefault("ADD_LABEL", true)
 	defaultLabel := env.GetDefault("DEFAULT_LABEL", "label-required")
-	prefix := env.GetDefault("PREFIX", "prefix")
-	separator := env.GetDefault("SEPARATOR", "/")
+	prefix := env.GetDefault("LABEL_PREFIX", "prefix")
+	separator := env.GetDefault("LABEL_SEPARATOR", "/")
 	comment := env.GetDefault("COMMENT", "Add a label with a prefix.")
 
 	parts := strings.Split(repositoryFullName, "/")
