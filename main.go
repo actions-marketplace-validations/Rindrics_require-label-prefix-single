@@ -41,7 +41,7 @@ func main() {
 	}
 
 	logger.Info("Label not found")
-	client := infra.NewGitHubClient(config.Token)
+	client := infra.NewGitHubClient(config.Token, logger)
 
 	app := application.New(eventInfo, client, *config, logger)
 	err = app.Run()
