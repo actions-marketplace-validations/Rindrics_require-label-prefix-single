@@ -22,6 +22,7 @@ func main() {
 	eventInfo := infra.ParseEvent(event, logger)
 
 	config := application.NewConfig()
+	logger.Debug("config", "loaded", config)
 
 	logger.Debug("event info", "number", eventInfo.Number, "labels", eventInfo.Labels)
 
